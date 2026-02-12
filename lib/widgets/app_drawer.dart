@@ -37,7 +37,7 @@ class AppDrawer extends StatelessWidget {
               Navigator.pop(context); // Ferme le drawer
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => searchPage()),
+                MaterialPageRoute(builder: (context) => SearchPage()),
               );
             },
           ),
@@ -48,7 +48,7 @@ class AppDrawer extends StatelessWidget {
               Navigator.pop(context); // Ferme le drawer
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => explorePage()),
+                MaterialPageRoute(builder: (context) => ExplorePage()),
               );
             },
           ),
@@ -59,7 +59,7 @@ class AppDrawer extends StatelessWidget {
               Navigator.pop(context); // Ferme le drawer
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => detailPage()),
+                MaterialPageRoute(builder: (context) => DetailPage()),
               );
             },
           ),
