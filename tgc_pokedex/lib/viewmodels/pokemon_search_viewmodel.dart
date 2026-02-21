@@ -1,14 +1,13 @@
+// viewmodels/pokemon_search_viewmodel.dart
+
 import 'package:flutter/foundation.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
 import 'package:tgc_pokedex/models/pokemon.dart';
+import 'package:tgc_pokedex/services/pokemon_service.dart';
 
 class PokemonSearchViewModel extends ChangeNotifier {
-  late final String _apiKey;
+  final PokemonService _service;
 
-  PokemonSearchViewModel() {
-    _apiKey = const String.fromEnvironment('API_KEY');
-  }
+  PokemonSearchViewModel(this._service);
 
   String _searchQuery = '';
   List<PokemonCard> _cards = [];
@@ -39,30 +38,13 @@ class PokemonSearchViewModel extends ChangeNotifier {
     notifyListeners();
 
     try {
-      final query = _searchQuery.replaceAll(' ', '+');
+      _cards = await _service.searchCards(_searchQuery);
 
-      final uri = Uri.parse(
-        'https://api.pokemontcg.io/v2/cards?q=name:$query',
-      );
-
-      final response = await http.get(
-        uri,
-        headers: {
-          'X-Api-Key': _apiKey,
-        },
-      );
-
-      if (response.statusCode == 200) {
-        final decoded = json.decode(response.body);
-        final List data = decoded['data'];
-
-        _cards =
-            data.map((json) => PokemonCard.fromJson(json)).toList();
-      } else {
-        _errorMessage = 'Erreur serveur (${response.statusCode})';
+      if (_cards.isEmpty) {
+        _errorMessage = 'Aucune carte trouvée pour "$_searchQuery"';
       }
     } catch (e) {
-      _errorMessage = 'Erreur: $e';
+      _errorMessage = e.toString();
     } finally {
       _loading = false;
       notifyListeners();

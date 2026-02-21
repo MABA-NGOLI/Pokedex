@@ -31,7 +31,7 @@ class AppDrawer extends StatelessWidget {
             },
           ),
           ListTile(
-            leading: Icon(Icons.pages),
+            leading: Icon(Icons.search),
             title: Text(' Page de recherche'),
             onTap: () {
               Navigator.pop(context); // Ferme le drawer
@@ -42,7 +42,7 @@ class AppDrawer extends StatelessWidget {
             },
           ),
           ListTile(
-            leading: Icon(Icons.pages),
+            leading: Icon(Icons.explore),
             title: Text(' Page exploration'),
             onTap: () {
               Navigator.pop(context); // Ferme le drawer
@@ -53,7 +53,7 @@ class AppDrawer extends StatelessWidget {
             },
           ),
           ListTile(
-            leading: Icon(Icons.pages),
+            leading: Icon(Icons.visibility),
             title: Text('Page de détails '),
             onTap: () {
               Navigator.pop(context); // Ferme le drawer
